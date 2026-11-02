@@ -4,10 +4,11 @@
 
 ![Final prototype](docs/photos/FINAL_PHOTO.jpg)
 
+
 *CASA0014 Connected Environments · UCL · Arduino MKR WiFi 1010 → MQTT → Vespera*
 
 ## Concept
-<!-- Your words: the idea, who it is for (e.g. a showroom / hotel lobby), why lighting matters for materials. -->
+![Concept sketch of the material mood board](docs/diagrams/material_moodboard_concept.png)
 
 ## Inspiration
 <!-- Your words: interior material boards, references (link and credit them). -->
