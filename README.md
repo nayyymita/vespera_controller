@@ -8,6 +8,7 @@
 *CASA0014 Connected Environments · UCL · Arduino MKR WiFi 1010 → MQTT → Vespera*
 
 ## Concept
+**Early concept sketch: layered material samples, with the leaf and textiles as decorative accents**
 ![Concept sketch of the material mood board](docs/diagrams/material_moodboard_concept.png)
 
 ## Inspiration
