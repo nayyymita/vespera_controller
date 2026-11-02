@@ -108,10 +108,10 @@ See [tests/](tests/) and the [devlog](docs/devlog.md).
 - "Make a system diagram and circuit diagram for my material moodboard project"
 
 ## Future use
-Room-scale ambient lighting that responds to the materials being viewed
-Real colour temperature (2700K–6500K) using tunable-white LEDs, since RGB LEDs can’t produce warm white or grey
-A showroom version: scan or tap any sample to see it under its intended lighting
-Logging which materials visitors press, so designers learn what people are drawn to
+- Room-scale ambient lighting that responds to the materials being viewed
+- Real colour temperature (2700K–6500K) using tunable-white LEDs, since RGB LEDs can’t produce warm white or grey
+- A showroom version: scan or tap any sample to see it under its intended lighting
+- Logging which materials visitors press, so designers learn what people are drawn to
 
 ## Licence
 MIT
