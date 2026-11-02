@@ -10,6 +10,7 @@
 ## Concept
 **Early concept sketch: layered material samples, with the leaf and textiles as decorative accents**
 ![Concept sketch of the material mood board](docs/diagrams/material_moodboard_concept.png)
+![Concept sketch of the material mood board](docs/diagrams/material_names.png)
 
 ## Inspiration
 <!-- Your words: interior material boards, references (link and credit them). -->
