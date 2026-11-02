@@ -86,7 +86,32 @@ See [tests/](tests/) and the [devlog](docs/devlog.md).
 | [docs/devlog.md](docs/devlog.md) | Dated development log |
 
 ## AI use
-<!-- Required by the module. Your words: which tools (e.g. Claude), what for (e.g. code framework, debugging, system and wiring diagrams), example prompts, and what you did yourself. -->
+**Claude (Anthropic)** – code drafting and debugging, diagrams, documentation structure 
+**What AI helped with**
+- Drafted the sketch framework: button debouncing, non-blocking frame timer,
+ the Boat/oak stripe animation, and the v5 structure
+  (idle palette, 60 s timeout, moving mosaic)
+- Generated the system and wiring diagrams in docs/diagrams/
+- Suggested the README structure and starting RGB values
+  
+**What I did**
+- Concept and pivots (FACE ID → pond → material mood board) and the material selection
+- All wiring, soldering and the physical build
+- Found the diagonal-leg button fault through testing
+- Tested colours on Lumi and the real Vespera and chose the final values
+- Wrote the concept, reflection and devlog
+
+**Example prompts**
+- "Help me wire 5 push buttons to the MKR1010 and send colours to Vespera"
+- "Check my code, the first button works but the second doesn't"
+- "Change the colours to match my moodboard and add an idle palette"
+- "Make a system diagram and circuit diagram for my material moodboard project"
+
+## Future use
+Room-scale ambient lighting that responds to the materials being viewed
+Real colour temperature (2700K–6500K) using tunable-white LEDs, since RGB LEDs can’t produce warm white or grey
+A showroom version: scan or tap any sample to see it under its intended lighting
+Logging which materials visitors press, so designers learn what people are drawn to
 
 ## Licence
 MIT
