@@ -21,7 +21,7 @@
     Button 6 (pin 0) : Fabric        -> white / charcoal woven checker
     No press for 60 s                -> idle palette
 
-  Vespera: topic student/CASA0014/luminaire/<lightId>
+  Vespera: topic student/CASA0014/luminaire/15
            12 columns x 6 rows = 72 LEDs, numbered down each column
   Wiring:  each button between its pin and GND (diagonal legs), INPUT_PULLUP
            pin 6 avoided - wired to the MKR1010's built-in LED
