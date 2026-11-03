@@ -2,7 +2,13 @@
 
 <!-- One sentence in your own words: what it is and what it does. -->
 
-![Final prototype](docs/photos/FINAL_PHOTO.jpg)
+![Final prototype](docs/photos/2026-11-03_Final_prototype.jpeg)
+
+![Final prototype2](docs/photos/2026-11-03_Final_prototype_2.jpeg)
+
+![Final prototype3](docs/photos/2026-11-03_Final_prototype_3.jpeg)
+
+![Final prototype4](docs/photos/2026-11-03_Final_prototype_34.jpeg)
 
 
 *CASA0014 Connected Environments · UCL · Arduino MKR WiFi 1010 → MQTT → Vespera*
@@ -10,17 +16,29 @@
 ## Concept
 **Early concept sketch: layered material samples, with the leaf and textiles as decorative accents**
 ![Concept sketch of the material mood board](docs/diagrams/material_moodboard_concept.png)
-![Concept sketch of the material mood board](docs/diagrams/material_names.png)
+
 
 ## Inspiration
-<!-- Your words: interior material boards, references (link and credit them). -->
+I am very familiar with moodboards, due to a lot of designing. Initial idea was to make an interactive artwork, with many layers/levels creating depth, but it was clumsy and i wanted to make something with two levels maximum and more importantly, something really useful, or that factor that could be of some direction in the future, thus, while i was working on placing the placeholders, and voila! why don't i just make a real life moodboard and complement colors with it! 
+But, it made more sense if one could actually view materials in a desired lighting while one is out shopping for interior design materials, or just takinga. stroll through furniture. Because every material is distinct to its own way of experiencing under different tones of light. 
+
+![Koi Pond Cpontroller prototype 1](docs/photos/2026-10-28_firstprototype.jpeg)
+
+![Koi Pond Cpontroller prototype 1](docs/photos/2026-10-28_firstprototype_elements.jpeg)
+
+![Koi Pond Cpontroller prototype 1](docs/photos/2026-10-28_firstprototype2.jpeg)
+
+##PIVOT TO
+
+![Concept sketch of the material mood board](docs/diagrams/material_names.png)
+
 
 **Diagrams:** [Concept](docs/diagrams/concept.jpg) · [System](docs/diagrams/system_diagram.png) · [Wiring](docs/diagrams/wiring_diagram.png)
 
 ## How it works
 1. Six material tiles float on hidden push buttons.
 2. When nothing is pressed, Vespera shows the board's palette (two columns per material).
-3. Pressing a tile shows that material's light scene.
+3. Pressing a tile shows that material's light scene/ Color of the material.
 4. After 60 seconds with no press, Vespera returns to the palette.
 
 The MKR1010 builds a 72-LED frame (216 bytes of RGB) and publishes it to `student/CASA0014/luminaire/15` on `mqtt.cetools.org`, only when the frame changes.
@@ -38,28 +56,27 @@ The MKR1010 builds a 72-LED frame (216 bytes of RGB) and publishes it to `studen
 | USB power bank | Portable power |
 
 ## Wiring
-| Tile | Material | MKR pin | Wire colour |
-|------|----------|---------|-------------|
-| 1 | Fluted wood | D1 | yellow |
-| 2 | Grey oak | D2 | orange |
-| 3 | Blue glass | D3 | blue |
-| 4 | Oak block | D4 | purple |
-| 5 | Silver mosaic | D5 | red |
-| 6 | Fabric | D0 | grey |
-| — | GND chain | GND | green / black |
+| Tile | Material | MKR pin |
+|------|----------|---------|
+| 1 | Cork | D1 |
+| 2 | Warm wood | D2 |
+| 3 | Fluted wood | D3 |
+| 4 | Oak | D4 |
+| 5 | Glass mosaic | D5 |
+| 6 | Fabric | D0 |
+| – | Shared ground (all buttons) | GND |
 
 - Each button: one leg → its pin, the **diagonal** leg → GND (legs on the same side are joined inside the button).
 - `INPUT_PULLUP`, so no resistors are needed.
 - Pin 6 is avoided: it drives the MKR1010's built-in LED.
+- Wires: orange and red hook-up wire, labelled B1–B6 at the breadboard end.
 
 ![Wiring diagram](docs/diagrams/wiring_diagram.png)
-
-<!-- Check the wire colours match what you actually soldered. -->
 
 ## Iterations
 | Version | What changed |
 |---------|--------------|
-| FACE ID idea | <!-- your words: why you moved away from face recognition --> |
+| FACE ID idea | vision board is tough to deal with in given time |
 | [v3](sketches/v3_pond_controller/) | Paper pond, 5 buttons, moving boat stripes |
 | [v4](sketches/v4_pond_controller/) | 6th button, two-tone colours |
 | Soldering | Moved from breadboard to soldered buttons |
@@ -67,16 +84,16 @@ The MKR1010 builds a 72-LED frame (216 bytes of RGB) and publishes it to `studen
 
 ## Testing
 See [tests/](tests/) and the [devlog](docs/devlog.md).
-<!-- Your words: the diagonal-leg bug and how you found it; what the colours looked like on the real Vespera vs Lumi. -->
+All my trials and errors, and bugs, fixes, prototyping mishaps, soldering issues and all the fun stuff about process and the making of this real life moodboard is in there (devlog & tests)
 
 ## Reflection and future work
-<!-- Your words: what worked, what was hard, what you'd do next. -->
+I would really love to see retail spaces acquiring such a concept, very personalised, very spatially enhancing experience!
 
 ## Getting started
 1. Open `sketches/v5_mood_board/v5_mood_board.ino` in the Arduino IDE and select **Arduino MKR WiFi 1010**.
 2. Install the libraries **WiFiNINA** and **PubSubClient**.
 3. Copy `arduino_secrets.example.h` to `arduino_secrets.h` in the same folder and fill in your Wi-Fi and MQTT details. Never commit it.
-4. Change `lightId` to your own Vespera number.
+4. Change `lightId` to Vespera number.
 5. Wire the buttons as above and upload.
 
 ## Repository structure
@@ -89,7 +106,7 @@ See [tests/](tests/) and the [devlog](docs/devlog.md).
 | [docs/devlog.md](docs/devlog.md) | Dated development log |
 
 ## AI use
-**Claude (Anthropic)** – code drafting and debugging, diagrams, documentation structure 
+**Claude (Anthropic)** – Assisted in logic drafting, complex code like glint and debugging, diagrams, documentation structure 
 **What AI helped with**
 - Drafted the sketch framework: button debouncing, non-blocking frame timer,
  the Boat/oak stripe animation, and the v5 structure
@@ -103,12 +120,8 @@ See [tests/](tests/) and the [devlog](docs/devlog.md).
 - Found the diagonal-leg button fault through testing
 - Tested colours on Lumi and the real Vespera and chose the final values
 - Wrote the concept, reflection and devlog
+- Built prototypes and finally made the final decent looking moodboard controller
 
-**Example prompts**
-- "Help me wire 5 push buttons to the MKR1010 and send colours to Vespera"
-- "Check my code, the first button works but the second doesn't"
-- "Change the colours to match my moodboard and add an idle palette"
-- "Make a system diagram and circuit diagram for my material moodboard project"
 
 ## Future use
 - Room-scale ambient lighting that responds to the materials being viewed
