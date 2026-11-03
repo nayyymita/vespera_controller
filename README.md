@@ -8,7 +8,7 @@
 
 ![Final prototype3](docs/photos/2026-11-03_Final_prototype_3.jpeg)
 
-![Final prototype4](docs/photos/2026-11-03_Final_prototype_34.jpeg)
+![Final prototype4](docs/photos/2026-11-03_Final_prototype_4.jpeg)
 
 
 *CASA0014 Connected Environments · UCL · Arduino MKR WiFi 1010 → MQTT → Vespera*
