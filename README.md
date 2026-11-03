@@ -1,6 +1,6 @@
 # Vespera Material Mood Board
 
-<!-- One sentence in your own words: what it is and what it does. -->
+Touch a material, change the light.
 
 ![Final prototype](docs/photos/2026-11-03_Final_prototype.jpeg)
 
@@ -33,8 +33,6 @@ But, it made more sense if one could actually view materials in a desired lighti
 ![Concept sketch of the material mood board](docs/diagrams/material_names.png)
 
 
-**Diagrams:** [Concept](docs/diagrams/concept.jpg) · [System](docs/diagrams/system_diagram.png) · [Wiring](docs/diagrams/wiring_diagram.png)
-
 ## How it works
 1. Six material tiles float on hidden push buttons.
 2. When nothing is pressed, Vespera shows the board's palette (two columns per material).
@@ -51,8 +49,8 @@ The MKR1010 builds a 72-LED frame (216 bytes of RGB) and publishes it to `studen
 | Arduino MKR WiFi 1010 | Reads the buttons, publishes to MQTT over Wi-Fi |
 | 6 tactile push buttons | One under each interactive material tile |
 | Hook-up wire, solder, heat-shrink, hot glue | Soldered button connections |
-| White foam board (4 × A4), cardboard, craft sticks | Base, spacers and tile posts |
-| Material samples | Fluted wood, grey oak, blue glass, oak, silver mosaic, fabric + decorative pieces |
+| White foam board (2 × A4), cardboard, craft sticks | Base, spacers and tile posts |
+| Material samples | Cork, warm wood, fluted wood (craft sticks), oak, glass mosaic, fabric + decorative pieces (jute, dried leaves, flowers) |
 | USB power bank | Portable power |
 
 ## Wiring
@@ -71,6 +69,7 @@ The MKR1010 builds a 72-LED frame (216 bytes of RGB) and publishes it to `studen
 - Pin 6 is avoided: it drives the MKR1010's built-in LED.
 - Wires: orange and red hook-up wire, labelled B1–B6 at the breadboard end.
 
+*Early wiring diagram, tile names before the final samples. See table above.*
 ![Wiring diagram](docs/diagrams/wiring_diagram.png)
 
 ## Iterations
@@ -81,13 +80,16 @@ The MKR1010 builds a 72-LED frame (216 bytes of RGB) and publishes it to `studen
 | [v4](sketches/v4_pond_controller/) | 6th button, two-tone colours |
 | Soldering | Moved from breadboard to soldered buttons |
 | [v5](sketches/v5_mood_board/) | Material mood board, idle palette, 60 s timeout, moving mosaic |
+| Final samples | Blue glass dropped, cork added, light scenes remapped to the real materials |
 
 ## Testing
 See [tests/](tests/) and the [devlog](docs/devlog.md).
 All my trials and errors, and bugs, fixes, prototyping mishaps, soldering issues and all the fun stuff about process and the making of this real life moodboard is in there (devlog & tests)
 
 ## Reflection and future work
-I would really love to see retail spaces acquiring such a concept, very personalised, very spatially enhancing experience!
+I would really love to see retail spaces acquiring such a concept, very personalised, very spatially enhancing experience! this was really a fun project to work on because of how my thought process went from trying these things to actually making my vision, or the idea that i had in my head, brought alive. Also, i kept improvising, and that was the best part about this.
+
+In the end, I ended up doing something that I'm very, very familiar with and very comfortable with. Although the skeleton of the project, like working with buttons, wiring, soldering, and all of these things, is not really my forte, it was really a very interesting project. I could just oppose something that I could never think of doing with something that I'm really, really super familiar with or happy with. That was a very nice way 
 
 ## Getting started
 1. Open `sketches/v5_mood_board/v5_mood_board.ino` in the Arduino IDE and select **Arduino MKR WiFi 1010**.
