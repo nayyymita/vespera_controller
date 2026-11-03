@@ -1,23 +1,25 @@
 /*
   v5 MATERIAL MOOD BOARD -> Vespera  |  CASA0014, Arduino MKR1010
   ---------------------------------------------------------------
-  Six material samples float on hidden push buttons. Pressing a
+  Six material samples sit on hidden push buttons. Pressing a
   material changes Vespera's light to suit it.
 
   Changes from v4:
     - Pond scene replaced by a material mood board (6 interactive tiles)
-    - Idle state: Vespera shows the board's palette, 2 columns per material
+    - Idle state: Vespera shows the board's palette, 2 columns per material,
+      drifting slowly sideways
     - Pressing a tile shows that material's light scene
     - After 60 s with no press, Vespera returns to the idle palette
     - Material colours stored once in palette[6][3]
+    - Final samples: blue glass dropped, cork added, colours matched to the real samples
 
-       Button 1 (pin 1) : Fluted wood   -> brown / dark groove columns
-    Button 2 (pin 2) : Grey oak      -> light grey / slate rows (high contrast)
-    Button 3 (pin 3) : Blue glass    -> cobalt with aqua patches
-    Button 4 (pin 4) : Oak block     -> yellow stripes, moving sideways
-    Button 5 (pin 5) : Silver mosaic -> silver / cream / black mosaic, shifting + glint
-    Button 6 (pin 0) : Fabric        -> terracotta / linen columns
-    No press for 60 s                -> idle palette, 2 columns per material
+    Button 1 (pin 1) : Cork          -> orange-brown with dark speckles
+    Button 2 (pin 2) : Warm wood     -> wood-orange grain columns
+    Button 3 (pin 3) : Fluted wood   -> pale birch rows with groove shadows
+    Button 4 (pin 4) : Oak           -> yellow / warm-white stripes, moving
+    Button 5 (pin 5) : Glass mosaic  -> yellow-white / yellow-green / black, shifting + glint
+    Button 6 (pin 0) : Fabric        -> white / charcoal woven checker
+    No press for 60 s                -> idle palette
 
   Vespera: topic student/CASA0014/luminaire/<lightId>
            12 columns x 6 rows = 72 LEDs, numbered down each column
@@ -48,20 +50,22 @@ PubSubClient client(wifiClient);
 
 const int NUM_BUTTONS = 6;
 const int buttonPins[NUM_BUTTONS] = {1, 2, 3, 4, 5, 0};
-enum Mode { FLUTED_WOOD, GREY_OAK, BLUE_GLASS, OAK_BLOCK, SILVER_MOSAIC, FABRIC };
+enum Mode { CORK, WARM_WOOD, FLUTED_WOOD, OAK, GLASS_MOSAIC, FABRIC };
 const int IDLE = -1;
-const char* modeNames[NUM_BUTTONS] = {"Fluted wood", "Grey oak", "Blue glass", "Oak block", "Silver mosaic", "Fabric"};
+const char* modeNames[NUM_BUTTONS] = {"Cork", "Warm wood", "Fluted wood", "Oak", "Glass mosaic", "Fabric"};
 
-// Main colour of each material - used by the idle palette
+// Main colour of each material, in button order - used by the idle palette
 const byte palette[NUM_BUTTONS][3] = {
-  {140,  60,  15},   // fluted wood - brown
-  {190, 200, 225},   // grey oak    - cool grey
-  {  0,  60, 255},   // blue glass
-  {255, 190,  20},   // oak block   - yellow
-  {210, 215, 230},   // silver mosaic
-  {200,  40,  15}    // fabric      - terracotta
+  {190,  75,  15},   // cork         - dark orange-brown
+  {240, 130,  45},   // warm wood    - wood orange
+  {255, 200, 120},   // fluted wood  - pale birch
+  {255, 190,  20},   // oak          - yellow
+  {160, 220,  30},   // glass mosaic - yellow-green
+  {230, 230, 225}    // fabric       - white
 };
-const int idleOrder[NUM_BUTTONS] = {OAK_BLOCK, SILVER_MOSAIC, FABRIC, FLUTED_WOOD, GREY_OAK, BLUE_GLASS};
+
+// Order the materials appear across Vespera in the idle state
+const int idleOrder[NUM_BUTTONS] = {OAK, FABRIC, GLASS_MOSAIC, FLUTED_WOOD, WARM_WOOD, CORK};
 
 const unsigned long DEBOUNCE_MS = 30;
 int lastReading[NUM_BUTTONS];
@@ -142,76 +146,78 @@ void selectMode(int mode) {
 
 void drawCurrentMode() {
   switch (currentMode) {
-    case IDLE:          drawPalette();      break;
-    case FLUTED_WOOD:   drawFlutedWood();   break;
-    case GREY_OAK:      drawGreyOak();      break;
-    case BLUE_GLASS:    drawBlueGlass();    break;
-    case OAK_BLOCK:     drawOakBlock();     break;
-    case SILVER_MOSAIC: drawSilverMosaic(); break;
-    case FABRIC:        drawFabric();       break;
+    case IDLE:         drawPalette();     break;
+    case CORK:         drawCork();        break;
+    case WARM_WOOD:    drawWarmWood();    break;
+    case FLUTED_WOOD:  drawFlutedWood();  break;
+    case OAK:          drawOak();         break;
+    case GLASS_MOSAIC: drawGlassMosaic(); break;
+    case FABRIC:       drawFabric();      break;
   }
 }
 
-// Idle: 12 columns, 2 per material, in button order
+// Idle: the six material colours drift sideways, 2 columns each
 void drawPalette() {
+  int shift = (frame / 5) % 12;            // one column every 0.5 s
   for (int i = 0; i < num_leds; i++) {
-    int m = colOf(i) / 2;
+    int c = (colOf(i) + shift) % 12;
+    int m = idleOrder[c / 2];
     setPixel(i, palette[m][0], palette[m][1], palette[m][2]);
   }
 }
 
-// --- oak block ---
-void drawOakBlock() {
+// --- cork: orange-brown with dark speckles ---
+void drawCork() {
+  for (int i = 0; i < num_leds; i++) {
+    if ((i * 37) % 7 == 0) setPixel(i, 60, 20, 0);      // dark speckle
+    else                   setPixel(i, 190, 75, 15);    // cork
+  }
+}
+
+// --- warm wood: vertical grain columns ---
+void drawWarmWood() {
+  for (int i = 0; i < num_leds; i++) {
+    if (colOf(i) % 2 == 0) setPixel(i, 240, 130, 45);   // wood orange
+    else                   setPixel(i, 255, 175, 95);   // lighter grain
+  }
+}
+
+// --- fluted wood: horizontal flutes, like the sticks ---
+void drawFlutedWood() {
+  for (int i = 0; i < num_leds; i++) {
+    if (rowOf(i) % 2 == 0) setPixel(i, 255, 200, 120);  // pale birch
+    else                   setPixel(i, 140, 80, 30);    // groove shadow
+  }
+}
+
+// --- oak: yellow and warm-white stripes, moving sideways ---
+void drawOak() {
   const int stripeWidth = 6;
   for (int i = 0; i < num_leds; i++) {
     int band = ((i + frame) / stripeWidth) % 2;
-    if (band == 0) setPixel(i, 255, 190, 20);
-    else           setPixel(i, 255, 130, 0);
+    if (band == 0) setPixel(i, 205, 100, 20);           // yellow
+    else           setPixel(i, 255, 240, 200);          // warm white
   }
 }
 
-// --- fluted wood ---
-void drawFlutedWood() {
-  for (int i = 0; i < num_leds; i++) {
-    if (colOf(i) % 2 == 0) setPixel(i, 140, 60, 15);
-    else                   setPixel(i, 50, 20, 5);
-  }
-}
-
-// --- grey oak ---
-void drawGreyOak() {
-  for (int i = 0; i < num_leds; i++) {
-    if (colOf(i) % 2 == 0) setPixel(i, 230, 230, 235);
-    else                   setPixel(i, 30, 35, 50);
-  }
-}
-
-// --- blue glass ---
-void drawBlueGlass() {
-  for (int i = 0; i < num_leds; i++) {
-    if (i % 12 < 3) setPixel(i, 0, 70, 255);
-    else            setPixel(i, 0, 190, 255);
-  }
-}
-
-// --- silver mosaic: three tones in mosaic squares, shifting diagonally ---
-void drawSilverMosaic() {
+// --- glass mosaic: three tones in 2x2 squares, shifting diagonally, with glints ---
+void drawGlassMosaic() {
   const int cell = 2;
   int shift = frame / 4;
   for (int i = 0; i < num_leds; i++) {
     int tone = (colOf(i) / cell + rowOf(i) / cell + shift) % 3;
-    if (tone == 0)      setPixel(i, 250, 250, 210);   // white marble
-    else if (tone == 1) setPixel(i, 0, 0, 0);   // textured silver check silver again
-    else                setPixel(i, 80, 80, 90);      // brushed steel
+    if (tone == 0)      setPixel(i, 255, 240, 170);     // yellow-white
+    else if (tone == 1) setPixel(i, 230, 250, 10);      // yellow-green
+    else                setPixel(i, 0, 0, 0);           // black
     if ((i * 7 + frame) % 37 == 0) setPixel(i, 255, 255, 255);   // glint
   }
 }
 
-// --- fabric ---
+// --- fabric: fine woven checker, white and charcoal ---
 void drawFabric() {
   for (int i = 0; i < num_leds; i++) {
-    if (colOf(i) % 2 == 0) setPixel(i, 255, 40, 15);
-    else                   setPixel(i, 255, 200, 170);   // terracotta - check again
+    if ((colOf(i) + rowOf(i)) % 2 == 0) setPixel(i, 230, 230, 225);
+    else                                 setPixel(i, 10, 10, 15);
   }
 }
 
