@@ -1,4 +1,4 @@
-# Devlog — Vespera Pond Controller
+# Devlog — Vespera Pond Controller --> Material mood board
 
 ## 2026-10-28
 **Did:**
@@ -67,3 +67,63 @@
 
 ![v4 lily pads](photos/2026-10-28_06_correct_buttons.jpeg)
 ![v4 koi fish on vespera](photos/2026-10-28_07_v4_koi.jpeg)
+
+## 2026-10-31 — Repo clean-up
+- Pushed v3 and v4 sketches, button test sketch, photos and this devlog
+
+## 2026-11-02 — Pivot: pond → material mood board (v5)
+
+### Why I changed the concept
+- Koi pond was fun, but i needed a use case scenario, hence i pivoted to making a real material moodboard that could have its own ambient lighting, to 1. view different materials in various tones of light to check what complements it 2. to check if light enhances the depth of the material. 
+### Design
+- 6 interactive material tiles on hidden buttons: fluted wood, grey oak, blue glass,
+  oak block, silver mosaic, fabric
+- Decorative layer glued flat underneath: jute, lace, marbled paper, watercolour, wooden leaves
+- Scheme: warm woods, terracotta, linen, blue glass, silver mosaic
+![v5 concept sketch](photos/2026-11-02_visualisation01.jpeg)
+- Paper and cardboard mock-ups to test layouts: A3 landscape looked scattered → thus, portrait cluster
+![v5 paper orientation mockups](photos/2026-11-02_initial_placeholders.jpeg)
+![v5 paper orientation mockups](photos/2026-11-02_portrait_placeholders_a3.jpeg)
+- Tried a two-level layout (overlapping tiles on risers) 
+  layering now comes from flat decorative pieces peeking out under the tiles
+  and one tile for the second layer
+- Kept interactive tiles because why not!
+
+### Code (v5)
+- Modes renamed to materials; main colours stored once in palette[6][3]
+- Idle state: Vespera shows the board's palette, 2 columns per material
+- 60 s with no press → back to the palette
+- Silver mosaic: three tones (silver / cream / near-black), shifting diagonally, with glints
+
+### Colour testing (Lumi + Vespera)
+- First palette (browns, greys, creams from the samples) looked almost identical on the LEDs
+- RGB LEDs can't show brown or grey: brown → dim orange, grey → dim white
+- Moved to stronger, separate hues: brown, cool grey, deep blue, yellow, white, terracotta
+- Grey oak given a high-contrast light/slate pattern so it stands out
+- Trade-off: colour accuracy vs telling materials apart → chose legibility
+- What I learned: The more complex I get with the colors, the lights dont show the depth.
+- The room needs to be dark inorder for the color to be visible, otherwise its a light shade
+- Also the shape of the vespera, for a project with complex colors or for any project with a visualisation depth, a linear placement of lights is better/ elements showcasing need to be simple.
+
+### Build (evening)
+- Base: 2 × A4 foam board (5 mm) joined into portrait A3
+- Cardboard frame around the edge + centre spine along the join for stiffness (4cm on the edges and 5cm in the center for spin like grip because the elements are heavy)
+- 6 soldered buttons glued face-up at each tile position, wires through holes to the back
+- Breadboard + MKR1010 fixed on the centre spine, USB out of the left edge
+- Wires labelled (B1–B6, GND) and taped flat
+![v5 wiring layout](photos/2026-11-02_14_wiring_layout.jpeg)
+- Side walls (~35–40 mm) so the board rests on the walls, not on the Arduino
+![v5 structure](photos/2026-11-02_14_box_structure.jpeg) 
+- Press test with cardboard placeholder tiles: all 6 buttons changed Lumi correctly
+![v5 base skeleton prototype](photos/2026-11-02_13_press_test_mosaic.jpeg) 
+- Problem: Soldered wires kept falling off, had to solder again and again. Had to handle a little gently and put a lot of logic and thought behind mounting the buttons onto the foam board.
+### SKELETON VIDEO
+![v5 base skeleton prototype](photos/IMG_77332.mov) 
+### Docs
+- Added system and wiring diagrams, concept sketch, photos, secrets template, tests README, README structure
+
+### Next
+- [ ] Corner posts under each tile
+- [ ] Real samples on (arriving Tue), decorative layer glued down
+- [ ] Full test on power bank + lab Wi-Fi, check MQTT Explorer
+- [ ] Final photos, finish README sections, upload screenshot PDF to Moodle
