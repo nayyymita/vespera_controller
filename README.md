@@ -28,7 +28,7 @@ But, it made more sense if one could actually view materials in a desired lighti
 
 ![Koi Pond Cpontroller prototype 1](docs/photos/2026-10-28_firstprototype2.jpeg)
 
-##PIVOT TO
+## PIVOT TO
 
 ![Concept sketch of the material mood board](docs/diagrams/material_names.png)
 
