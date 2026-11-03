@@ -118,7 +118,7 @@
 ![v5 base skeleton prototype](photos/2026-11-02_13_press_test_mosaic.jpeg) 
 - Problem: Soldered wires kept falling off, had to solder again and again. Had to handle a little gently and put a lot of logic and thought behind mounting the buttons onto the foam board.
 ### SKELETON VIDEO
-![v5 base skeleton prototype](photos/IMG_77332.mP4) 
+![v5 base skeleton prototype](photos/IMG_77332.mp4) 
 ### Docs
 - Added system and wiring diagrams, concept sketch, photos, secrets template, tests README, README structure
 
