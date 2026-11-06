@@ -47,9 +47,6 @@
 - **Fix:** soldered to **diagonal legs** → all 5 buttons work
 - Wrote `tests/button_test` to show live pin states without WiFi/MQTT
 
-### What I learned
-- (write in your own words)
-
 ### Next
 - [ ] Animate Flowers, Koi, Lily pads, Water (currently static placeholders)
 - [ ] Build the paper pond and fit the buttons under the scene
@@ -124,6 +121,25 @@
 
 ### Next
 - [ ] Corner posts under each tile
-- [ ] Real samples on (arriving Tue), decorative layer glued down
-- [ ] Full test on power bank + lab Wi-Fi, check MQTT Explorer
+- [ ] Real samples on (arriving Tue)
 - [ ] Final photos, finish README sections, upload screenshot PDF to Moodle
+
+
+## 2026-11-03 — Real materials and final build
+
+### Materials
+- Waited for the Amazon delivery (vinyl wood samples, glass mosaic, fabric)
+- Cork: repurposed an IKEA cork trivet (pot / heat-pad holder)
+- Fluted wood: made by hand from craft sticks
+- Blue glass dropped: the sample was too heavy for a tile resting on a small tactile button
+  the button did not push back up despite many ways of supporting it → changes the orientation of the moodboard, added wood, and cork instead
+
+### Build
+- Final tiles on the A3 board (2 × A4 foam board), each over its button
+- Decorative layer: jute, and leaves, Pantone-style label
+- Tested every tile with button_test with the real materials on: (result)
+
+### Code
+- Remapped tiles to pins: Cork D1, Warm wood D2, Fluted wood D3, Oak D4, Glass mosaic D5, Fabric D0
+- New light scenes matched to the real samples (cork, warm wood, fluted rows, oak stripes,
+  glass mosaic shimmer + glints, fabric)
